@@ -5,10 +5,11 @@ from ament_index_python.packages import get_package_share_path
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
-
+import os
 
 def generate_launch_description():
     rover_path = get_package_share_path('roverrobotics_description')
@@ -50,10 +51,11 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description}]
     )
     
+    
+
     ld.add_action(model_arg)
     ld.add_action(robot_driver)
-    ld.add_action(accessories_launch)
+    #ld.add_action(accessories_launch)
     ld.add_action(joint_state_publisher_node)
     ld.add_action(robot_state_publisher_node)
-   
     return ld

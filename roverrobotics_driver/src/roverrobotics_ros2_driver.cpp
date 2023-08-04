@@ -344,8 +344,8 @@ void RobotDriver::update_odom() {
   odom.pose.pose.position.y = pos_y;
   odom.pose.pose.position.z = 0.0;
     
-  odom.twist.twist.linear.x = mean_linear;
-  odom.twist.twist.angular.z = mean_angular;
+  odom.twist.twist.linear.x = robot_data_.linear_vel;
+  odom.twist.twist.angular.z = robot_data_.angular_vel;
   
   // Covariance: 
   // If not moving, trust the encoders completely
@@ -360,8 +360,8 @@ void RobotDriver::update_odom() {
   }
   else
   {
-    odom.twist.covariance[0] = 0.15;
-    odom.twist.covariance[7] = 0.15;
+    odom.twist.covariance[0] = 0.5;
+    odom.twist.covariance[7] = 0.5;
     odom.twist.covariance[35] = 1.0;
   }
   	

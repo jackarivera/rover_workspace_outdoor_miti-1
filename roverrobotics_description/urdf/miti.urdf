@@ -7,13 +7,95 @@
     <xacro:property name="wheel_mass" value="4.53592" />
     <xacro:property name="chassis_mass" value="4.53592" />
 
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
     <!-- Part Includes - Payload, Sensors, Etc.. -->
     <!-- Comment or Uncomment any of these to add them to the dev payload -->
     <!-- You can always link them elsewhere if you wish by editing accessories/<sensor>.urdf -->
     <xacro:property name="payload_z_offset" value="0.156" />
     <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/rover_dev_payload.urdf" />
-    <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/rplidar_s2.urdf" />
+    <!-- <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/rplidar_s2.urdf" /> -->
     <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/imu.urdf" />
+
+    <xacro:include filename="$(find roverrobotics_description)/urdf/accessories/OS1-64.urdf.xacro" />
+    <xacro:OS1-64 parent="payload_link">
+        <origin xyz="-0.12 0 0.292" rpy="0 0 1.572" />
+    </xacro:OS1-64>
+
+
+    <link name="gps">
+        <visual>
+        <geometry>
+            <cylinder length="0.083" radius="0.08"/>
+        </geometry>
+        <material name="black"/>
+        </visual>
+    </link>
+
+    <joint name="gps_to_payload" type="fixed">
+        <parent link="payload_link"/>
+        <child link="gps"/>
+        <origin xyz="0.135 0 0.09"/>
+    </joint>
+
+    <link name="80_20">
+    <!-- back -->
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="-0.05 0.125 0"/>
+        </visual>
+        
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="-0.05 -0.125 0"/>
+        </visual>
+
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="-0.05 0 0.1078" rpy="1.572 0 0"/>
+        </visual>
+    <!-- front -->
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="0.05 0.125 0"/>
+        </visual>
+        
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="0.05 -0.125 0"/>
+        </visual>
+
+        <visual>
+        <geometry>
+            <box size="0.025 0.025 0.24"/>
+        </geometry>
+        <material name="black"/>
+        <origin xyz="0.05 0 0.1078" rpy="1.572 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="payload_to_ouster" type="fixed">
+        <parent link="payload_link"/>
+        <child link="80_20"/>
+        <origin xyz="-0.12 0 0.17"/>
+    </joint>
 
     <!-- Robot Definition -->
     <link name="base_link" />

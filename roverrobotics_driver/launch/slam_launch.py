@@ -14,7 +14,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     
-    rl_launch_path = os.path.join(get_package_share_directory("roverrobotics_driver"), 'launch', 'robot_localizer.launch.py')
+    rl_launch_path = os.path.join(get_package_share_directory("roverrobotics_driver"), 'launch', 'robot_localizer_indoor.launch.py')
     robot_localizer_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(rl_launch_path))
     
     # Slam toolbox launch setup

@@ -7,14 +7,18 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import LogInfo
+from launch.actions import IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 from math import pi
 import yaml
 
 def generate_launch_description():
     ld = LaunchDescription()
 
+    ouster_launch = IncludeLaunchDescription(XMLLaunchDescriptionSource(os.path.join(get_package_share_directory("ouster_ros"), 'launch', 'sensor.launch.xml')))
+    
     accessories_config_path = Path(get_package_share_directory(
         'roverrobotics_driver'), 'config/accessories.yaml')
 
@@ -61,5 +65,6 @@ def generate_launch_description():
         # Add Realsense d435i to launch description
         ld.add_action(realsense_node)
 
+    ld.add_action(ouster_launch)
     return ld
 
