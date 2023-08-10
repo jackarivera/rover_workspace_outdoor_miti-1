@@ -15,8 +15,8 @@ from math import pi
 
 def generate_launch_description():
 
-    nmeasat_launch_path = os.path.join(get_package_share_directory("nmea_navsat_driver"), 'launch', 'nmea_serial_driver.launch.py')
-    nmeasat_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(nmeasat_launch_path))
+    #nmeasat_launch_path = os.path.join(get_package_share_directory("nmea_navsat_driver"), 'launch', 'nmea_serial_driver.launch.py')
+    #nmeasat_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(nmeasat_launch_path))
 
 
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -69,7 +69,7 @@ def generate_launch_description():
     ld.add_action(localization_node)
     ld.add_action(navsat_transform_node)
     ld.add_action(gps_localization_node)
-    ld.add_action(nmeasat_launch)
+    #ld.add_action(nmeasat_launch)
     
     return ld
 

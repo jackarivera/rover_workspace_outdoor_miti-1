@@ -99,7 +99,7 @@
               <vertical>
                 <samples>${lasers}</samples>
                 <resolution>1</resolution>
-                <min_angle>${vfov_min}</min_angle>
+                <min_angle>${vfov_min} - 0.2</min_angle>
                 <max_angle>${vfov_max}</max_angle>
               </vertical>
             </scan>

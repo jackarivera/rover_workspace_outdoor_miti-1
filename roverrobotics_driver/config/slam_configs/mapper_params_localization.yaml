@@ -11,11 +11,11 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_link
-    scan_topic: /scan
+    scan_topic: /ouster
     mode: localization
 
     # if you'd like to start localizing on bringup in a map and pose
-    map_file_name: /home/rover/rover_workspace/office_map
+    map_file_name: /home/rover/rover_workspace/null_map
     map_start_pose: [0.0, 0.0, 0.0]
 
     debug_logging: false
